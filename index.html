@@ -57,16 +57,11 @@
             // Shuffle the names
             shuffleArray(names);
 
-            // Create and display teams of 2
+            // Create and display teams
             const teams = [];
             for (let i = 0; i < names.length; i += 2) {
-                if (i + 1 < names.length) {
-                    const team = [names[i], names[i + 1]];
-                    teams.push(team);
-                } else {
-                    // If there's an odd number of people, add one to the last team
-                    teams[teams.length - 1].push(names[i]);
-                }
+                const team = [names[i], names[i + 1]];
+                teams.push(team);
             }
 
             // Display teams
