@@ -60,9 +60,11 @@
 
             // Create and display teams
             const teams = [];
-            for (let i = 0; i < names.length; i += 2) {
+            let i = 0;
+            while (i < names.length) {
                 const team = [names[i], names[i + 1]];
                 teams.push(team);
+                i += 2;
             }
 
             // Display teams
