@@ -46,13 +46,13 @@
             const names = inputText.split(",").map(name => name.trim());
 
             // Ensure Noah and Ashley are always on the same team
-            const noahIndex = names.findIndex(name => name.toLowerCase() === "noah");
-            const ashleyIndex = names.findIndex(name => name.toLowerCase() === "ashley");
+            const noahIndex = names.indexOf("Noah");
+            const ashleyIndex = names.indexOf("Ashley");
             
             if (noahIndex !== -1 && ashleyIndex !== -1) {
-                const noah = names.splice(noahIndex, 1)[0];
-                const ashley = names.splice(ashleyIndex - 1, 1)[0];
-                names.push(`${noah} and ${ashley}`);
+                names.splice(noahIndex, 1);
+                names.splice(ashleyIndex, 1);
+                names.push("Noah and Ashley");
             }
 
             // Shuffle the names
@@ -60,8 +60,8 @@
 
             // Create and display teams of two
             const teams = [];
-            while (names.length >= 2) {
-                const team = [names.pop(), names.pop()];
+            for (let i = 0; i < names.length; i += 2) {
+                const team = [names[i], names[i + 1]];
                 teams.push(team);
             }
 
@@ -73,13 +73,6 @@
                 teamElement.textContent = `Team ${index + 1}: ${team.join(" and ")}`;
                 teamDisplay.appendChild(teamElement);
             });
-
-            // Display any remaining individuals
-            if (names.length > 0) {
-                const remainingElement = document.createElement("p");
-                remainingElement.textContent = `Remaining: ${names.join(", ")}`;
-                teamDisplay.appendChild(remainingElement);
-            }
         });
     </script>
 </body>
