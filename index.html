@@ -44,14 +44,18 @@
         document.getElementById("create-teams").addEventListener("click", function () {
             const inputText = document.getElementById("team-input").value;
             const names = inputText.split(",").map(name => name.trim());
-            
-            // Ensure Noah and Ashley are on the same team
+
+            // Ensure Noah and Ashley are always on the same team
             const noahIndex = names.indexOf("Noah");
             const ashleyIndex = names.indexOf("Ashley");
             if (noahIndex !== -1 && ashleyIndex !== -1) {
-                names.splice(noahIndex, 1); // Remove Noah
-                names.splice(ashleyIndex - 1, 1); // Remove Ashley
-                names.push("Noah and Ashley"); // Add them as a team
+                // Remove Noah and Ashley from the names list
+                names.splice(noahIndex, 1);
+                names.splice(ashleyIndex, 1);
+
+                // Add Noah and Ashley as a team
+                const team = ["Noah", "Ashley"];
+                names.push(team.join(" and "));
             }
 
             // Shuffle the names
