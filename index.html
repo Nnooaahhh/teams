@@ -46,16 +46,13 @@
             const names = inputText.split(",").map(name => name.trim());
 
             // Ensure Noah and Ashley are always on the same team
-            const noahIndex = names.indexOf("Noah");
-            const ashleyIndex = names.indexOf("Ashley");
+            const noahIndex = names.findIndex(name => name.toLowerCase() === "noah");
+            const ashleyIndex = names.findIndex(name => name.toLowerCase() === "ashley");
+            
             if (noahIndex !== -1 && ashleyIndex !== -1) {
-                // Remove Noah and Ashley from the names list
-                names.splice(noahIndex, 1);
-                names.splice(ashleyIndex, 1);
-
-                // Add Noah and Ashley as a team
-                const team = ["Noah", "Ashley"];
-                names.push(team.join(" and "));
+                const noah = names.splice(noahIndex, 1)[0];
+                const ashley = names.splice(ashleyIndex - 1, 1)[0];
+                names.push(`${noah} and ${ashley}`);
             }
 
             // Shuffle the names
