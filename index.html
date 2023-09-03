@@ -58,13 +58,11 @@
             // Shuffle the names
             shuffleArray(names);
 
-            // Create and display teams
+            // Create and display teams of two
             const teams = [];
-            let i = 0;
-            while (i < names.length) {
-                const team = [names[i], names[i + 1]];
+            while (names.length >= 2) {
+                const team = [names.pop(), names.pop()];
                 teams.push(team);
-                i += 2;
             }
 
             // Display teams
@@ -75,6 +73,13 @@
                 teamElement.textContent = `Team ${index + 1}: ${team.join(" and ")}`;
                 teamDisplay.appendChild(teamElement);
             });
+
+            // Display any remaining individuals
+            if (names.length > 0) {
+                const remainingElement = document.createElement("p");
+                remainingElement.textContent = `Remaining: ${names.join(", ")}`;
+                teamDisplay.appendChild(remainingElement);
+            }
         });
     </script>
 </body>
