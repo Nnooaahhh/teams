@@ -34,6 +34,13 @@
     <div id="team-display"></div>
 
     <script>
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
         document.getElementById("create-teams").addEventListener("click", function () {
             const inputText = document.getElementById("team-input").value;
             const names = inputText.split(",").map(name => name.trim());
@@ -47,17 +54,19 @@
                 names.push("Noah and Ashley"); // Add them as a team
             }
 
-            // Randomly shuffle the names
-            for (let i = names.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [names[i], names[j]] = [names[j], names[i]];
-            }
+            // Shuffle the names
+            shuffleArray(names);
 
             // Create and display teams of 2
             const teams = [];
             for (let i = 0; i < names.length; i += 2) {
-                const team = [names[i], names[i + 1]];
-                teams.push(team);
+                if (i + 1 < names.length) {
+                    const team = [names[i], names[i + 1]];
+                    teams.push(team);
+                } else {
+                    // If there's an odd number of people, add one to the last team
+                    teams[teams.length - 1].push(names[i]);
+                }
             }
 
             // Display teams
